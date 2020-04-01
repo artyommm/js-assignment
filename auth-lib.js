@@ -9,7 +9,7 @@ function users()
 //Создает нового пользователя с указанным логином username и паролем password, возвращает созданного пользователя.
 function createUser(name, password)
 {
-
+    
 }
 
 // Удаляет пользователя user
