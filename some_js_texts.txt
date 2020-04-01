@@ -1,0 +1,81 @@
+//функция createGroup
+createGroup("Cool_group");
+createGroup("Not_cool_group");
+createGroup("Very_cool_group");
+createGroup("The_coolest_group");
+
+//функция createRight
+createRight("Eat_chocolates");
+createRight("Drink_cola");
+createRight("Drink_whiskey");
+createRight("To_smoke");
+
+//функция createUser
+createUser("Cool_boy","1234");
+createUser("Not_Cool_Boy","1111");
+createUser("Pepsi_Cola_Boy","2222");
+createUser("CoolHacker","7777");
+
+//функция addRightToGroup
+addRightToGroup("Drink_cola","Cool_group");
+addRightToGroup("Eat_chocolates","Cool_group");
+addRightToGroup("To_smoke","Not_cool_group");
+addRightToGroup("Drink_whiskey","Not_cool_group");
+addRightToGroup("Eat_chocolates","The_coolest_group");
+
+//функция groupRights
+groupRights("Cool_group");
+groupRights("Very_cool_group");
+groupRights("The_coolest_group");
+groupRights("Not_cool_group");
+
+//функция addUserToGroup
+addUserToGroup("Not_Cool_Boy","Cool_group");
+addUserToGroup("Pepsi_Cola_Boy","Cool_group");
+addUserToGroup("Pepsi_Cola_Boy","Very_cool_group");
+addUserToGroup("Pepsi_Cola_Boy","The_coolest_group");
+addUserToGroup("Cool_boy","Cool_group");
+addUserToGroup("Cool_boy","Not_cool_group");
+addUserToGroup("Cool_boy","The_coolest_group");
+addUserToGroup("CoolHacker","Cool_group");
+addUserToGroup("CoolHacker","Not_cool_group");
+addUserToGroup("CoolHacker","The_coolest_group");
+
+//функция userGroups
+userGroups("Not_Cool_Boy");
+userGroups("Cool_boy");
+userGroups("Pepsi_Cola_Boy");
+userGroups("CoolHacker");
+
+//функция deleteUser
+deleteUser("Not_Cool_Boy");
+deleteUser("Hello_world");
+
+//функция removeUserFromGroup
+removeUserFromGroup("Not_Cool_Boy","Cool_group");
+removeUserFromGroup("Not_Cool_Boy","Very_cool_group");
+removeUserFromGroup("Cool_boy","Cool_group");
+removeUserFromGroup("CoolHacker","Not_cool_group");
+
+//allUsers[0].groups.findIndex(function(object) {return object.name==="Cool_group"})
+//allUsers[0].groups[]
+
+
+//функция rights()
+
+
+//функция deleteRight()
+deleteRight("Eat_chocolates"); 
+deleteRight("Drink_Vodka");
+
+//функция deleteGroup()
+deleteGroup("Cool_group");
+deleteGroup("Not_cool_group");
+
+
+//функция removeRightFromGroup()
+removeRightFromGroup("Drink_cola","Cool_group");
+removeRightFromGroup("Drink_whiskey","Not_cool_group");
+
+//функция userGroups
+//функция userGroups
