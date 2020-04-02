@@ -1,20 +1,20 @@
 //функция createGroup
-createGroup("Cool_group");
-createGroup("Not_cool_group");
-createGroup("Very_cool_group");
-createGroup("The_coolest_group");
+let group1 = createGroup("Cool_group");
+let group2 = createGroup("Not_cool_group");
+let group3 = createGroup("Very_cool_group");
+let group4 = createGroup("The_coolest_group");
 
 //функция createRight
-createRight("Eat_chocolates");
-createRight("Drink_cola");
-createRight("Drink_whiskey");
-createRight("To_smoke");
+let right1 = createRight("Eat_chocolates");
+let right1 = createRight("Drink_cola");
+let right1 = createRight("Drink_whiskey");
+let right1 = createRight("To_smoke");
 
 //функция createUser
-createUser("Cool_boy","1234");
-createUser("Not_Cool_Boy","1111");
-createUser("Pepsi_Cola_Boy","2222");
-createUser("CoolHacker","7777");
+let user1 = createUser("Cool_boy","1234");
+let user2 = createUser("Not_Cool_Boy","1111");
+let user3 = createUser("Pepsi_Cola_Boy","2222");
+let user4 = createUser("CoolHacker","7777");
 
 //функция addRightToGroup
 addRightToGroup("Drink_cola","Cool_group");

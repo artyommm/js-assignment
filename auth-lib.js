@@ -2,6 +2,9 @@ let allUsers = [];
 let allGroups = [];//массив объектов {название группы, права}
 let allRights = [];//массив прав
 
+let user_logged = false;//изначально никто не авторизовался
+let loggedUser = undefined;
+
 // Возвращает массив всех пользователей.
 function users() 
 {
@@ -86,11 +89,11 @@ function removeUserFromGroup(user, group)
     {
         throw new Error("There are no this user!");
     }
-    else if(allGroups.findIndex(function(object) {return object===group})===-1)//в allGroups - объекты
+    /*else if(allGroups.findIndex(function(object) {return object===group})===-1)
     {
         throw new Error("There are no this group!");
-    }
-    else if(user.groups.indexOf(group)===-1) //у пользователей просто массив названий
+    }*/
+    else if(user.groups.findIndex(function(object) {return object===group})===-1)
     {
         throw new Error("There are no this user in this group!");
     }
@@ -124,6 +127,13 @@ function deleteRight(right)
     else
     {
         allRights.splice(allRights.indexOf(right));
+        allGroups.forEach(function(object)
+        {
+            if(object.rights.indexOf(right)!=-1)
+            {
+                object.rights.splice(object.rights.indexOf(right),1);
+            }
+        });
     }
 }
 
@@ -154,6 +164,13 @@ function deleteGroup(group)
     else
     {
         allGroups.splice(allGroups.findIndex(function(object) {return object===group}),1);
+        allUsers.forEach(function(object)
+        {
+            if(object.groups.indexOf(group)!=-1)
+            {
+                object.groups.splice(object.groups.indexOf(group),1);
+            }
+        });
     }
 }
 
@@ -190,10 +207,14 @@ function removeRightFromGroup(right,group)
     {
         throw new Error("Invalid syntax!");
     }
-    else if(allGroups.findIndex(function(object) {return object===group})===-1 || allRights.indexOf(right)===-1)
+    else if(allGroups.indexOf(group)===-1) //allGroups.findIndex(function(object) {return object===group})===-1
     {
-        throw new Error("There are no this right or this group!");
+       throw new Error("There are no this group!");
     }
+    /*else if(allRights.indexOf(right)===-1)
+    {
+       throw new Error("There are no this right!");
+    }*/
     else if(group.rights.indexOf(right)===-1)
     {
         throw new Error("There are no this right in this group!");
@@ -206,20 +227,61 @@ function removeRightFromGroup(right,group)
 
 function login(username, password) 
 {
-
+    if(!user_logged)
+    {
+        if(allUsers.findIndex(function(object) {return object.name===username})===-1)
+        {
+            throw new Error("Invalid login!");
+        }
+        else if(allUsers[allUsers.findIndex(function(object) {return object.name===username})].password!=password)
+        {
+            throw new Error("Invalid password!");
+        }
+        else
+        {
+            user_logged=true;
+            loggedUser=allUsers[allUsers.findIndex(function(object) {return object.name===username})];
+            return true;
+        }
+    }
+    else
+    {
+        return false;
+    }
 }
 
 function currentUser() 
 {
-
+    return loggedUser;
 }
 
 function logout() 
 {
-
+    user_logged=false;
+    loggedUser=undefined;
 }
 
 function isAuthorized(user, right) 
 {
-
+    if(!user || !right)
+    {
+        throw new Error("Invalid syntax!");
+    }   
+    else if(allUsers.findIndex(function(object) {return object===user})===-1 || allRights.indexOf(right)===-1)
+    {
+        throw new Error("There are no this user or this right!");
+    }
+    else
+    {
+        let flag = false;
+        let temp = user.groups;
+        temp.forEach(function(group)
+        {
+            if(allGroups[allGroups.findIndex(function(object) {return object===group})].rights.indexOf(right)!=-1)
+            {
+                flag = true;
+            }
+        })
+        return flag;
+    }
 }
