@@ -27,13 +27,13 @@ function deleteUser(user)
     {
         throw new Error("Invalid syntax!");
     }
-    else if(allUsers.findIndex(function(object) {return object.name===user})===-1)
+    else if(allUsers.findIndex(function(object) {return object===user})===-1)
     {
-        throw new Error("There are no this object with this name!");
+        throw new Error("There are no this object!");
     }
     else
     {
-        allUsers.splice(allUsers.findIndex(function(object) {return object.name===user}),1);
+        allUsers.splice(allUsers.findIndex(function(object) {return object===user}),1);
     }
 }
 
@@ -44,13 +44,13 @@ function userGroups(user)
     {
         throw new Error("Invalid syntax!");
     }
-    else if(allUsers.findIndex(function(object) {return object.name===user})===-1)
+    else if(allUsers.findIndex(function(object) {return object===user})===-1)
     {
         throw new Error("There are no this object with this name!");
     }
     else
     {
-        return allUsers[allUsers.findIndex(function(object) {return object.name===user})].groups;
+        return user.groups;
     }
 }
 
@@ -65,13 +65,13 @@ function addUserToGroup(user, group)
     {
         throw new Error("Invalid syntax of group!");
     }
-    else if(allUsers.findIndex(function(object) {return object.name===user})===-1 || allGroups.findIndex(function(object) {return object.name===group})===-1)
+    else if(allUsers.findIndex(function(object) {return object===user})===-1 || allGroups.findIndex(function(object) {return object===group})===-1)
     {
         throw new Error("There are no this object with this name!");
     }
     else
     {
-        allUsers[allUsers.findIndex(function(object) {return object.name===user})].groups.push(group);
+        user.groups.push(group);
     }
 }
 
@@ -82,21 +82,21 @@ function removeUserFromGroup(user, group)
     {
         throw new Error("Invalid syntax!");
     }
-    else if(allUsers.findIndex(function(object) {return object.name===user})===-1)
+    else if(allUsers.findIndex(function(object) {return object===user})===-1)
     {
         throw new Error("There are no this user!");
     }
-    else if(allGroups.findIndex(function(object) {return object.name===group})===-1)//в allGroups - объекты
+    else if(allGroups.findIndex(function(object) {return object===group})===-1)//в allGroups - объекты
     {
         throw new Error("There are no this group!");
     }
-    else if(allUsers[allUsers.findIndex(function(object) {return object.name===user})].groups.indexOf(group)===-1) //у пользователей просто массив названий
+    else if(user.groups.indexOf(group)===-1) //у пользователей просто массив названий
     {
         throw new Error("There are no this user in this group!");
     }
     else
     {
-        allUsers[allUsers.findIndex(function(object) {return object.name===user})].groups.splice(allUsers[allUsers.findIndex(function(object) {return object.name===user})].groups.indexOf(group),1);
+        user.groups.splice(user.groups.indexOf(group),1);
     }
 }
 
@@ -147,39 +147,39 @@ function createGroup(name)
 // Удаляет группу group
 function deleteGroup(group) 
 {
-    if(allGroups.findIndex(function(object) {return object.name===group})===-1)
+    if(allGroups.findIndex(function(object) {return object===group})===-1)
     {
-        throw new Error("There are no this right with this name!");
+        throw new Error("There are no this group with this name!");
     }
     else
     {
-        allGroups.splice(allGroups.findIndex(function(object) {return object.name===group}),1);
+        allGroups.splice(allGroups.findIndex(function(object) {return object===group}),1);
     }
 }
 
 // Возвращает массив прав, которые принадлежат группе group
 function groupRights(group) 
 {
-    if(allGroups.findIndex(function(object) {return object.name===group})===-1)
+    if(allGroups.findIndex(function(object) {return object===group})===-1)
     {
-        throw new Error("There are no this right with this name!");
+        throw new Error("There are no this group with this name!");
     }
     else
     {
-        return allGroups[allGroups.findIndex(function(object) {return object.name===group})].rights;
+        return allGroups[allGroups.findIndex(function(object) {return object===group})].rights;
     }
 }
 
 // Добавляет право right к группе group
 function addRightToGroup(right,group) 
 {
-    if(allGroups.findIndex(function(object) {return object.name===group})===-1 || allRights.indexOf(right)===-1)
+    if(allGroups.findIndex(function(object) {return object===group})===-1 || allRights.indexOf(right)===-1)
     {
-        throw new Error("There are no this right of group with this name!");
+        throw new Error("There are no this right or group with this name!");
     }
     else
     {
-        allGroups[allGroups.findIndex(function(object) {return object.name===group})].rights.push(right);
+        group.rights.push(right);
     }
 }
 
@@ -190,17 +190,17 @@ function removeRightFromGroup(right,group)
     {
         throw new Error("Invalid syntax!");
     }
-    else if(allGroups.findIndex(function(object) {return object.name===group})===-1 || allRights.indexOf(right)===-1)
+    else if(allGroups.findIndex(function(object) {return object===group})===-1 || allRights.indexOf(right)===-1)
     {
         throw new Error("There are no this right or this group!");
     }
-    else if(allGroups.findIndex(function(object) {return object.name===group}).rights.indexOf(right)===-1)
+    else if(group.rights.indexOf(right)===-1)
     {
         throw new Error("There are no this right in this group!");
     }
     else
     {
-        allGroups[allGroups.findIndex(function(object) {return object.name===group})].rights.splice(allGroups.findIndex(function(object) {return object.name===group}).rights.indexOf(right),1);
+        group.rights.splice(group.rights.indexOf(right),1);
     }
 }
 
